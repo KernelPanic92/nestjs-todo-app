@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Todo } from '../../entities';
-import { TodoDto, AddTodoDto, UpdateTodoDto } from '../../dto';
+import { TodoDto, AddTodoDto, EditTodoDto } from '../../dto';
 import { TodoMapperService } from '../todo-mapper/todo-mapper.service';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class TodoService {
     return this.todoMapper.modelToDto(todo);
   }
 
-  public async edit(id: number, { title, completed }: UpdateTodoDto): Promise<TodoDto> {
+  public async edit(id: number, { title, completed }: EditTodoDto): Promise<TodoDto> {
     const todo = await this.todoRepository.findOne(id);
 
     if (isNullOrUndefined(todo)) throw new NotFoundException();

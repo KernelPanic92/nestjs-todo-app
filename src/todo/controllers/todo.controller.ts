@@ -1,7 +1,6 @@
-import { UpdateTodoDto } from './../dto/update-todo-dto';
 import { TodoService } from './../services/todo/todo.service';
 import { Controller, Get, Param, Post, Put, Body, Delete } from '@nestjs/common';
-import { TodoDto, AddTodoDto } from './../dto';
+import { TodoDto, AddTodoDto, EditTodoDto } from './../dto';
 
 @Controller('todos')
 export class TodoController {
@@ -19,7 +18,7 @@ export class TodoController {
   }
 
   @Put(':id')
-  public async edit(@Param('id') id: number, @Body() todo: UpdateTodoDto): Promise<TodoDto> {
+  public async edit(@Param('id') id: number, @Body() todo: EditTodoDto): Promise<TodoDto> {
       return this.todoService.edit(id, todo);
   }
 

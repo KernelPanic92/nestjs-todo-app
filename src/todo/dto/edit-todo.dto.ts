@@ -1,6 +1,6 @@
 import { IsBoolean, IsNotEmpty, IsString } from 'class-validator';
 
-export class UpdateTodoDto {
+export class EditTodoDto {
 
   @IsString()
   @IsNotEmpty()
@@ -9,7 +9,7 @@ export class UpdateTodoDto {
   @IsBoolean()
   public readonly completed: boolean;
 
-  public constructor(opts?: Partial<UpdateTodoDto>) {
+  public constructor(opts?: Partial<EditTodoDto>) {
     Object.assign(this, opts);
   }
 
