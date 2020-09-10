@@ -33,24 +33,26 @@ export class TodoService {
   }
 
   public async edit(id: number, { title, completed }: EditTodoDto): Promise<TodoDto> {
-    const todo = await this.todoRepository.findOne(id);
+    let todo = await this.todoRepository.findOne(id);
 
     if (isNullOrUndefined(todo)) throw new NotFoundException();
 
     todo.completed = completed;
     todo.title = title;
 
-    await this.todoRepository.save(todo);
+    todo = await this.todoRepository.save(todo);
 
     return this.todoMapper.modelToDto(todo);
   }
 
   public async remove(id: number): Promise<Todo> {
-    const todo = await this.todoRepository.findOne(id);
+    let todo = await this.todoRepository.findOne(id);
 
     if (isNullOrUndefined(todo)) throw new NotFoundException();
 
-    return await this.todoRepository.remove(todo);
+    todo = await this.todoRepository.remove(todo);
+
+    return todo;
   }
 
 }
